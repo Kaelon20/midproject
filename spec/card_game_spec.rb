@@ -1,5 +1,5 @@
-require 'card'
-require 'deck'
+require 'card_game'
+
 
 RSpec.describe Card do
     let(:card) {Card.new("clubs", "two")} #create object to run test
@@ -21,8 +21,9 @@ RSpec.describe Deck do
     describe "#deal" do #testing the deal method
         it "correctly deals the deck" do #testing the deal method
             deck.deal
-            expect(deck.length()).to eq(51)
+            expect(deck.cards.length).to eq(51)
         end
     end
 
 end
+
