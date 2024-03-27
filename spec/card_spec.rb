@@ -1,9 +1,10 @@
 require 'card'
 
-Rspec.describe Card do
-    describe ".to_s" do
+RSpec.describe Card do
+    let(:card) {Card.new("clubs", "two")}
+    describe "#to_s" do
         it "correctly represents a single playing card" do
-            expect(Card.to_s("club", "2").to eq("This is the 2 of clubs"))
+            expect(card.to_s).to eq("This is the two of clubs")
         end
     end
 end
