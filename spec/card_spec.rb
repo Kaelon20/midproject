@@ -17,4 +17,12 @@ RSpec.describe Deck do
             expect(deck.shuffle).not_to eq(deck)
         end
     end
+
+    describe "#deal" do #testing the deal method
+        it "correctly deals the deck" do #testing the deal method
+            deck.deal
+            expect(deck.length()).to eq(51)
+        end
+    end
+
 end
