@@ -52,6 +52,10 @@ class Hand
     end
   end
 
+  def deal_card
+    hand << @deck.deal
+  end
+
   def dealt_hand #method to see cards in hand
     puts hand
   end
@@ -163,6 +167,81 @@ class Hand
   end
 end
 
+class Player
+  attr_reader :hand, :pot, :deck 
+
+  def initialize(hand, deck)
+    @pot = 100
+    @hand = hand
+    @deck = deck
+  end
 
 
+  def discard_cards(index)
+    @hand[index].pop
+    @hand << @deck.deal_card
+  end
+
+
+  def player_choice(choice)
+    pc = choice
+
+    if pc == "fold"
+      return fold
+    elsif pc == "see"
+      return see
+    elsif pc == "raise"
+      return raise
+    end
+  end
+
+  private
+
+  def fold
+    puts "Player Folds"
+    hand.clear
+  end
+
+  def see
+    puts "Current pot: #{@pot}"
+  end
+
+  def raise
+    @pot += 50
+    puts "Pot raised to #{@pot}"
+  end
+  
+
+end
+
+class Game
+  attr_reader :deck, :players, :current_player_index, :pot
+
+  def initialize(players)
+    @players = players
+    @deck = Deck.new
+    @pot = 0
+    @current_player_index = 0
+  end
+
+  def start_round
+    # Deal cards to players
+    players.each do |player|
+      player.hand = Hand.new(deck)
+      player.hand.deal_hand
+    end
+
+  end
+
+  def next_player
+    @current_player_index = (@current_player_index + 1) % players.length
+    players[@current_player_index]
+  end
+
+  def collect_bets(amount)
+    @pot += amount
+  end
+
+ 
+end
 

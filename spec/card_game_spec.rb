@@ -80,7 +80,37 @@ RSpec.describe Hand do
     end
 end
 
+RSpec.describe Player do
+    let(:deck) {Deck.new}
+    let(:hand) {Hand.new(deck)}
+    let(:player) {Player.new(hand, deck)}
+    describe "#discard_card" do
+        it "correctly discard and replace player card" do
+            first_hand = player.hand
+            player.discard_cards(1)
+            player.discard_cards(0)
+            expect(player.hand).not_to eq(first_hand)
+        end
+    end
 
+    describe "#player_choice" do
+        it "correctly chooses fold" do
+            allow(player).to receive(:gets).and_return("fold")
+            expect(player.player_choice).to eq("Player Fold")
+        end
+
+        it "correctly chooses see" do
+            allow(player).to receive(:gets).and_return("see")
+            expect(player.player_choice).to eq("Current pot: 100")
+        end
+        
+        it "correctly chooses raise" do
+            allow(player).to receive(:gets).and_return("raise")
+            expect(player.pot).to eq(150)
+        end
+        
+    end
+end
 
 
 
