@@ -30,6 +30,7 @@ end
 RSpec.describe Hand do
     let(:deck) {Deck.new} 
     let(:hand) { Hand.new(deck) }
+    let(:hand2){ Hand.new(deck) }
     describe "#power_ranking" do
       it "correctly matches your cards strength" do
         hand.deal_hand
@@ -57,4 +58,21 @@ RSpec.describe Hand do
         end
       end
     end
+
+    describe "#winning_hand" do
+        it "correctly shows the winning hand" do
+            hand.deal_hand
+            hand2.deal_hand
+            rankings = {"Player 1" => hand.power_ranking, "Player 2" => hand2.power_ranking}
+            if rankings.winning_hand == "Player 1"
+                expect(rankings.winning_hand).to eq("Player 1")
+            elsif rankings.winning_hand == "Player 2"
+                expect(rankings.winning_hand).to eq("Player 2")
+            else
+                expect(rankings.winning_hand).to eq("Draw")
+            end
+        end
+    end
   end
+
+
