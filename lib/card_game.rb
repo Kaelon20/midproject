@@ -7,7 +7,7 @@ class Card
     end
 
     def to_s
-     "This is the #{value} of #{suit}" #method for the string
+     "#{value} of #{suit}" #method for the string
     end
 
 end
@@ -32,8 +32,11 @@ class Deck
     end
   
     def deal
+      shuffle
       @cards.pop
     end
-
-
 end
+
+
+
+
