@@ -146,6 +146,21 @@ class Hand
     end
     return hand_rank
   end
+
+  def winning_hand(hand_rankings) #method to deterine the winner
+    winning_hand = nil
+    winning_rank = nil
+
+    hand_rankings.each do |player, rank| #interate through each player and their rank to detemine the winner
+      if winning_rank.nil? || rank > winning_rank # changes winning player if either no winning rank or rank is greater than winning rank
+        winning_hand = player
+        winning_rank = rank
+      elsif rank == winning_rank
+        winning_hand = "Tie"  # If multiple hands have the same rank, set the winning hand as "Tie"
+      end
+    end
+    return winning_hand
+  end
 end
 
 
